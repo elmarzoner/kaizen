@@ -18,6 +18,44 @@
       padding: 40px 20px;
     }
 
+    /* ログインゲート */
+    .login-screen {
+      position: fixed; inset: 0;
+      display: flex; align-items: center; justify-content: center;
+      background: linear-gradient(135deg, #020617, #0f172a);
+      z-index: 100;
+    }
+    .login-screen.hidden { display: none; }
+    .login-box {
+      background: #0f172a; border: 1px solid #1e293b;
+      padding: 40px; width: 90%; max-width: 340px; text-align: center;
+    }
+    .login-box .login-logo {
+      width: 48px; height: 48px; margin: 0 auto 20px;
+      background: linear-gradient(135deg, #6366f1, #a855f7);
+      display: flex; align-items: center; justify-content: center;
+    }
+    .login-box h2 { font-size: 20px; font-weight: 800; letter-spacing: 0.06em; color: #fff; margin-bottom: 6px; }
+    .login-box p { font-size: 13px; color: #475569; margin-bottom: 28px; }
+    .login-box input {
+      width: 100%; padding: 10px 14px;
+      background: #1e293b; border: 1px solid #334155; color: #e2e8f0;
+      font-size: 14px; outline: none; margin-bottom: 12px;
+    }
+    .login-box input:focus { border-color: #6366f1; }
+    .login-box button {
+      width: 100%; padding: 10px;
+      background: linear-gradient(135deg, #6366f1, #a855f7);
+      color: #fff; border: none; font-size: 14px; font-weight: 700;
+      cursor: pointer; letter-spacing: 0.04em;
+    }
+    .login-box button:hover { opacity: 0.9; }
+    .login-error { color: #f87171; font-size: 12px; min-height: 18px; margin-top: 10px; }
+
+    /* メインコンテンツ */
+    #app { display: none; flex-direction: column; align-items: center; width: 100%; }
+    #app.visible { display: flex; }
+
     /* ヘッダー */
     header {
       text-align: center;
@@ -124,117 +162,163 @@
 </head>
 <body>
 
-  <header>
-    <div class="logo">
-      <div class="logo-icon">
+  <!-- ログインゲート -->
+  <div class="login-screen" id="login-screen">
+    <div class="login-box">
+      <div class="login-logo">
         <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
           <polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/>
         </svg>
       </div>
-      <h1>KAIZEN Portal</h1>
+      <h2>KAIZEN Portal</h2>
+      <p>社内利用限定</p>
+      <input type="password" id="pw-input" placeholder="パスワード" />
+      <button onclick="doLogin()">ログイン</button>
+      <div class="login-error" id="pw-error"></div>
     </div>
-    <p class="subtitle">社内アプリケーション一覧</p>
-  </header>
-
-  <div class="grid">
-
-    <!-- J-CRAFT99 -->
-    <a class="card" href="https://jcraft99-prod.web.app/" target="_blank" rel="noopener">
-      <div class="card-icon">
-        <svg width="40" height="40" viewBox="0 0 64 64">
-          <rect width="64" height="64" fill="#1e293b"/>
-          <rect x="8" y="16" width="48" height="6" rx="1" fill="#6366f1"/>
-          <rect x="8" y="26" width="48" height="4" rx="1" fill="#334155"/>
-          <rect x="8" y="34" width="48" height="4" rx="1" fill="#334155"/>
-          <rect x="8" y="42" width="30" height="4" rx="1" fill="#334155"/>
-        </svg>
-      </div>
-      <div class="card-title">J-CRAFT99 導入店舗一覧</div>
-      <div class="card-desc">99シリーズ導入店舗のデータベース。コールセンター・営業業務での店舗情報確認・管理に使用。</div>
-      <div class="card-tags">
-        <span class="tag">店舗管理</span>
-        <span class="tag">コールセンター</span>
-        <span class="tag">Firebase</span>
-      </div>
-      <div class="card-link">
-        開く
-        <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
-      </div>
-    </a>
-
-    <!-- 新商品開発シミュレーター -->
-    <a class="card" href="https://product-dev-simulator.web.app/" target="_blank" rel="noopener">
-      <div class="card-icon">
-        <svg width="40" height="40" viewBox="0 0 64 64">
-          <rect width="64" height="64" fill="#1e293b"/>
-          <polyline points="10,46 22,30 34,38 54,16" fill="none" stroke="#10b981" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/>
-          <polyline points="46,16 54,16 54,24" fill="none" stroke="#10b981" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/>
-        </svg>
-      </div>
-      <div class="card-title">新商品開発シミュレーター</div>
-      <div class="card-desc">発売日変更が財務インパクトに与える影響をリアルタイム分析。ガントチャート・コスト・売上を可視化。</div>
-      <div class="card-tags">
-        <span class="tag">商品開発</span>
-        <span class="tag">財務分析</span>
-        <span class="tag">Firebase</span>
-      </div>
-      <div class="card-link">
-        開く
-        <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
-      </div>
-    </a>
-
-    <!-- 自動化案件管理 -->
-    <a class="card" href="https://jidouka-app.web.app/" target="_blank" rel="noopener">
-      <div class="card-icon">
-        <svg width="40" height="40" viewBox="0 0 64 64">
-          <rect width="64" height="64" fill="#1e293b"/>
-          <rect x="10" y="14" width="44" height="36" rx="2" fill="none" stroke="#22d3ee" stroke-width="4"/>
-          <line x1="10" y1="24" x2="54" y2="24" stroke="#22d3ee" stroke-width="3"/>
-          <rect x="18" y="31" width="12" height="12" rx="1" fill="#334155" stroke="#22d3ee" stroke-width="2"/>
-          <line x1="36" y1="34" x2="46" y2="34" stroke="#475569" stroke-width="2"/>
-          <line x1="36" y1="39" x2="43" y2="39" stroke="#475569" stroke-width="2"/>
-        </svg>
-      </div>
-      <div class="card-title">自動化案件管理</div>
-      <div class="card-desc">社内の自動化・改善案件を一元管理。進捗・担当者・効果金額などをFirestoreで記録・共有。</div>
-      <div class="card-tags">
-        <span class="tag">自動化</span>
-        <span class="tag">案件管理</span>
-        <span class="tag">Firebase</span>
-      </div>
-      <div class="card-link">
-        開く
-        <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
-      </div>
-    </a>
-
-    <!-- Fastening ユーザーDB -->
-    <a class="card" href="https://fastening-user-db.web.app/" target="_blank" rel="noopener">
-      <div class="card-icon">
-        <svg width="40" height="40" viewBox="0 0 64 64">
-          <rect width="64" height="64" fill="#1e293b"/>
-          <circle cx="24" cy="24" r="10" fill="none" stroke="#f59e0b" stroke-width="4"/>
-          <path d="M40 40 a8 8 0 1 0 0.01 0" fill="none" stroke="#334155" stroke-width="4"/>
-          <line x1="31" y1="31" x2="40" y2="40" stroke="#f59e0b" stroke-width="4" stroke-linecap="round"/>
-        </svg>
-      </div>
-      <div class="card-title">Fastening ユーザーDB</div>
-      <div class="card-desc">営業先ユーザーのデータベース。ファスナー・リベッター台数などの明細を含む顧客情報の確認・管理に使用。</div>
-      <div class="card-tags">
-        <span class="tag">顧客管理</span>
-        <span class="tag">営業</span>
-        <span class="tag">Firebase</span>
-      </div>
-      <div class="card-link">
-        開く
-        <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
-      </div>
-    </a>
-
   </div>
 
-  <footer>© KAIZEN — 社内利用限定</footer>
+  <!-- メインコンテンツ -->
+  <div id="app">
+    <header>
+      <div class="logo">
+        <div class="logo-icon">
+          <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+            <polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/>
+          </svg>
+        </div>
+        <h1>KAIZEN Portal</h1>
+      </div>
+      <p class="subtitle">社内アプリケーション一覧</p>
+    </header>
+
+    <div class="grid">
+
+      <!-- J-CRAFT99 -->
+      <a class="card" href="https://jcraft99-prod.web.app/" target="_blank" rel="noopener">
+        <div class="card-icon">
+          <svg width="40" height="40" viewBox="0 0 64 64">
+            <rect width="64" height="64" fill="#1e293b"/>
+            <rect x="8" y="16" width="48" height="6" rx="1" fill="#6366f1"/>
+            <rect x="8" y="26" width="48" height="4" rx="1" fill="#334155"/>
+            <rect x="8" y="34" width="48" height="4" rx="1" fill="#334155"/>
+            <rect x="8" y="42" width="30" height="4" rx="1" fill="#334155"/>
+          </svg>
+        </div>
+        <div class="card-title">J-CRAFT99 導入店舗一覧</div>
+        <div class="card-desc">99シリーズ導入店舗のデータベース。コールセンター・営業業務での店舗情報確認・管理に使用。</div>
+        <div class="card-tags">
+          <span class="tag">店舗管理</span>
+          <span class="tag">コールセンター</span>
+          <span class="tag">Firebase</span>
+        </div>
+        <div class="card-link">
+          開く
+          <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
+        </div>
+      </a>
+
+      <!-- 新商品開発シミュレーター -->
+      <a class="card" href="https://product-dev-simulator.web.app/" target="_blank" rel="noopener">
+        <div class="card-icon">
+          <svg width="40" height="40" viewBox="0 0 64 64">
+            <rect width="64" height="64" fill="#1e293b"/>
+            <polyline points="10,46 22,30 34,38 54,16" fill="none" stroke="#10b981" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/>
+            <polyline points="46,16 54,16 54,24" fill="none" stroke="#10b981" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+        </div>
+        <div class="card-title">新商品開発シミュレーター</div>
+        <div class="card-desc">発売日変更が財務インパクトに与える影響をリアルタイム分析。ガントチャート・コスト・売上を可視化。</div>
+        <div class="card-tags">
+          <span class="tag">商品開発</span>
+          <span class="tag">財務分析</span>
+          <span class="tag">Firebase</span>
+        </div>
+        <div class="card-link">
+          開く
+          <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
+        </div>
+      </a>
+
+      <!-- 自動化案件管理 -->
+      <a class="card" href="https://jidouka-app.web.app/" target="_blank" rel="noopener">
+        <div class="card-icon">
+          <svg width="40" height="40" viewBox="0 0 64 64">
+            <rect width="64" height="64" fill="#1e293b"/>
+            <rect x="10" y="14" width="44" height="36" rx="2" fill="none" stroke="#22d3ee" stroke-width="4"/>
+            <line x1="10" y1="24" x2="54" y2="24" stroke="#22d3ee" stroke-width="3"/>
+            <rect x="18" y="31" width="12" height="12" rx="1" fill="#334155" stroke="#22d3ee" stroke-width="2"/>
+            <line x1="36" y1="34" x2="46" y2="34" stroke="#475569" stroke-width="2"/>
+            <line x1="36" y1="39" x2="43" y2="39" stroke="#475569" stroke-width="2"/>
+          </svg>
+        </div>
+        <div class="card-title">自動化案件管理</div>
+        <div class="card-desc">社内の自動化・改善案件を一元管理。進捗・担当者・効果金額などをFirestoreで記録・共有。</div>
+        <div class="card-tags">
+          <span class="tag">自動化</span>
+          <span class="tag">案件管理</span>
+          <span class="tag">Firebase</span>
+        </div>
+        <div class="card-link">
+          開く
+          <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
+        </div>
+      </a>
+
+      <!-- Fastening ユーザーDB -->
+      <a class="card" href="https://fastening-user-db.web.app/" target="_blank" rel="noopener">
+        <div class="card-icon">
+          <svg width="40" height="40" viewBox="0 0 64 64">
+            <rect width="64" height="64" fill="#1e293b"/>
+            <circle cx="24" cy="24" r="10" fill="none" stroke="#f59e0b" stroke-width="4"/>
+            <path d="M40 40 a8 8 0 1 0 0.01 0" fill="none" stroke="#334155" stroke-width="4"/>
+            <line x1="31" y1="31" x2="40" y2="40" stroke="#f59e0b" stroke-width="4" stroke-linecap="round"/>
+          </svg>
+        </div>
+        <div class="card-title">Fastening ユーザーDB</div>
+        <div class="card-desc">営業先ユーザーのデータベース。ファスナー・リベッター台数などの明細を含む顧客情報の確認・管理に使用。</div>
+        <div class="card-tags">
+          <span class="tag">顧客管理</span>
+          <span class="tag">営業</span>
+          <span class="tag">Firebase</span>
+        </div>
+        <div class="card-link">
+          開く
+          <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
+        </div>
+      </a>
+
+    </div>
+
+    <footer>© KAIZEN — 社内利用限定</footer>
+  </div>
+
+  <script>
+    const _PW = 'lobster1888b';
+    const _KEY = 'kaizen_auth';
+
+    function doLogin() {
+      if (document.getElementById('pw-input').value === _PW) {
+        sessionStorage.setItem(_KEY, '1');
+        showApp();
+      } else {
+        document.getElementById('pw-error').textContent = 'パスワードが違います';
+      }
+    }
+
+    function showApp() {
+      document.getElementById('login-screen').classList.add('hidden');
+      document.getElementById('app').classList.add('visible');
+    }
+
+    // Enterキー対応
+    document.getElementById('pw-input').addEventListener('keydown', e => {
+      if (e.key === 'Enter') doLogin();
+    });
+
+    // セッション維持（ブラウザを閉じるまでログイン状態を保持）
+    if (sessionStorage.getItem(_KEY) === '1') showApp();
+  </script>
 
 </body>
 </html>
