@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>KPI Portal</title>
+  <title>KPI達成支援ポータル</title>
   <style>
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
     body {
@@ -184,8 +184,21 @@
     /* フッター */
     footer {
       margin-top: 64px;
+      text-align: center;
+      line-height: 1.8;
+    }
+    footer .contact {
+      font-size: 13px;
+      color: #94a3b8;
+    }
+    footer .contact strong {
+      color: #818cf8;
+      font-weight: 700;
+    }
+    footer .copy {
       font-size: 12px;
       color: #334155;
+      margin-top: 4px;
     }
   </style>
 </head>
@@ -199,7 +212,7 @@
           <polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/>
         </svg>
       </div>
-      <h2>KPI Portal</h2>
+      <h2>KPI達成支援ポータル</h2>
       <p>社内利用限定</p>
       <input type="password" id="pw-input" placeholder="パスワード" />
       <button onclick="doLogin()">ログイン</button>
@@ -216,7 +229,7 @@
             <polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/>
           </svg>
         </div>
-        <h1>KPI Portal</h1>
+        <h1>KPI達成支援ポータル</h1>
       </div>
       <p class="subtitle">社内アプリケーション一覧</p>
     </header>
@@ -351,7 +364,10 @@
 
     </div>
 
-    <footer>© KPI — 社内利用限定</footer>
+    <footer>
+      <div class="contact">お問い合わせ先：<strong>経営企画室</strong>（本ポータル・各アプリに関するご質問はこちらへ）</div>
+      <div class="copy">© KPI達成支援ポータル ｜ 社内利用限定</div>
+    </footer>
   </div>
 
   <script>
