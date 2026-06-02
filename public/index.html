@@ -43,6 +43,12 @@
       font-size: 14px; outline: none; margin-bottom: 12px;
     }
     .login-box input:focus { border-color: #6366f1; }
+    /* 隠しユーザー名（ブラウザのパスワード保存を確実にするため。視覚的には非表示） */
+    .login-box .hidden-username {
+      position: absolute; left: -9999px; top: 0;
+      width: 1px; height: 1px; opacity: 0; margin: 0; padding: 0; border: 0;
+      pointer-events: none;
+    }
     .login-box button {
       width: 100%; padding: 10px;
       background: linear-gradient(135deg, #6366f1, #a855f7);
@@ -214,8 +220,12 @@
       </div>
       <h2>KPI達成支援ポータル</h2>
       <p>社内利用限定</p>
-      <input type="password" id="pw-input" placeholder="パスワード" />
-      <button onclick="doLogin()">ログイン</button>
+      <form id="login-form" onsubmit="return doLogin(event)" autocomplete="on">
+        <input type="text" name="username" id="login-username" value="kpi-portal"
+               autocomplete="username" tabindex="-1" aria-hidden="true" class="hidden-username" />
+        <input type="password" id="pw-input" name="password" autocomplete="current-password" placeholder="パスワード" />
+        <button type="submit">ログイン</button>
+      </form>
       <div class="login-error" id="pw-error"></div>
     </div>
   </div>
@@ -374,24 +384,21 @@
     const _PW = 'lobster1888b';
     const _KEY = 'kaizen_auth';
 
-    function doLogin() {
+    function doLogin(event) {
+      if (event) event.preventDefault();   // フォーム送信を抑止（ブラウザのパスワード保存判定は維持される）
       if (document.getElementById('pw-input').value === _PW) {
         sessionStorage.setItem(_KEY, '1');
         showApp();
       } else {
         document.getElementById('pw-error').textContent = 'パスワードが違います';
       }
+      return false;
     }
 
     function showApp() {
       document.getElementById('login-screen').classList.add('hidden');
       document.getElementById('app').classList.add('visible');
     }
-
-    // Enterキー対応
-    document.getElementById('pw-input').addEventListener('keydown', e => {
-      if (e.key === 'Enter') doLogin();
-    });
 
     // セッション維持（ブラウザを閉じるまでログイン状態を保持）
     if (sessionStorage.getItem(_KEY) === '1') showApp();
