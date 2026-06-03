@@ -101,8 +101,8 @@
       max-width: 900px;
       margin: 0 auto;
     }
-    /* 主要アプリ（上部 2枚） */
-    .grid-primary { grid-template-columns: repeat(2, 1fr); }
+    /* 主要アプリ（上部 3枚） */
+    .grid-primary { grid-template-columns: repeat(3, 1fr); }
     /* データベースアプリ（下部 3枚） */
     .grid-secondary { grid-template-columns: repeat(3, 1fr); }
 
@@ -244,9 +244,33 @@
       <p class="subtitle">社内アプリケーション一覧</p>
     </header>
 
-    <!-- ── 主要アプリ（上部 2枚） ── -->
+    <!-- ── 主要アプリ（上部 3枚） ── -->
     <div class="section-label">主要アプリ</div>
     <div class="grid grid-primary">
+
+      <!-- 実売ダッシュボード -->
+      <a class="card card-primary" href="https://uriage-dashboard.web.app/" target="_blank" rel="noopener">
+        <div class="card-icon">
+          <svg width="28" height="28" viewBox="0 0 64 64">
+            <rect width="64" height="64" fill="#1e293b"/>
+            <rect x="13" y="38" width="9" height="14" fill="#6366f1"/>
+            <rect x="27" y="28" width="9" height="24" fill="#818cf8"/>
+            <rect x="41" y="18" width="9" height="34" fill="#a855f7"/>
+            <polyline points="13,40 31,30 50,16" fill="none" stroke="#2dd4bf" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+        </div>
+        <div class="card-title">実売ダッシュボード</div>
+        <div class="card-desc">売上CSVと計画CSVを読み込み、事業部別・代理店別の売上／達成率／前年比を可視化。累計・半期計画・単月の各モードで日次の進捗を分析。</div>
+        <div class="card-tags">
+          <span class="tag">売上分析</span>
+          <span class="tag">達成率管理</span>
+          <span class="tag">経営管理</span>
+        </div>
+        <div class="card-link">
+          開く
+          <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
+        </div>
+      </a>
 
       <!-- 売上着地予測シミュレーター -->
       <a class="card card-primary" href="https://uriageyosoku-app.web.app/" target="_blank" rel="noopener">
